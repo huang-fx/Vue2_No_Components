@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+    <title>过滤器</title>
+</head>
+<body>
+    <div id="root">
+        <h3>现在是：{{ fmtTime }}</h3>
+        <h3>现在是：{{ getFmtTime() }}</h3>
+        <h3>现在是：{{ time | timeFormat_one }}</h3>        
+        <h3>现在是：{{ time | timeFormat_two('YYYY_MM_DD') }}</h3>
+        <h3>现在是：{{ time | timeFormat_two('YYYY_MM_DD') | mySlice }}</h3>
+        <h3 :x="msg | mySlice"></h3>
+    </div>
+    <!-- <div id="root2">
+        <h3>现在是：{{ time | mySlice }}</h3>
+    </div> -->
+</body>
+<script>
+    Vue.filter('mySlice', function(value) {
+        return value.slice(0, 4)
+    })
+    // new Vue({
+    //     el: '#root2',
+    //     data: {
+    //         time: 1750422858906
+    //     }
+    // })
+    new Vue({
+        el: '#root',
+        data: {
+            time: 1750422858906,
+            msg: '你是我的优乐美'
+        },
+        computed: {
+            fmtTime() {
+                return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+            }
+        },
+        methods: {
+            getFmtTime() {
+                return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+            }
+        },
+        filters: {
+            timeFormat_one(value) {
+                return dayjs(value).format('YYYY年MM月DD日 HH:mm:ss')
+            },
+            timeFormat_two(value, str='YYYY年MM月DD日 HH:mm:ss') {
+                return dayjs(value).format(str)
+            }
+        }
+    })
+</script>
+</html>

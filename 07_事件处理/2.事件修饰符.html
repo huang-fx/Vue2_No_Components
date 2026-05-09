@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+        .demo{
+            height: 50px;
+            background-color: skyblue;
+        }
+        .box1{
+            height: 30px;
+            background-color: peru;
+            padding: 6px;
+        }
+        .box2{
+            height: 10px;
+            padding: 6px;
+            background-color: blueviolet;
+        }
+        .demo1{
+            height: 50px;
+            background-color: skyblue;
+        }
+        .list {
+            height: 200px;
+            width: 100px;
+            background-color: salmon;
+            overflow: auto;
+        }
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- 阻止默认事件 -->
+        <a href="http://baidu.com" @click.prevent="showInfo">点我了解详情</a>
+        <!-- 阻止冒泡事件 -->
+        <div class="demo" @click="showInfo">
+            <button @click.stop="showInfo">点点我</button>
+        </div>
+        <!-- 事件只触发一次 -->
+        <button @click.once="showInfo">点我有惊喜</button>
+        <!-- 使用事件的捕获模式 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            <div class="box2" @click="showMsg(2)"></div>
+        </div>
+        <!-- 只有当event.target是当前操作的元素时才触发事件 相当于阻止冒泡事件 -->
+        <div class="demo1" @click.self="showTarget">
+            <button @click="showTarget">再来一次</button>
+        </div>
+        <!-- 事件的默认行为立即执行 无需等待事件回调执行完毕 -->
+        <ul @wheel.passive="showFor" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+</body>
+<script>
+    // Vue.config.productionTip = false   // 阻止 vue 在启动时生成生产提示
+    new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷'
+        },
+        methods: {
+            showInfo() {
+                alert('你好生活')
+            },
+            showMsg(msg) {
+                console.log(msg)                
+            },
+            showTarget(e) {
+                console.log(e.target)
+            },
+            showFor() {
+                for(let i = 0; i < 1000000; i++) {
+                    console.log('#')                    
+                }
+            }
+        }
+    })
+</script>
+</html>

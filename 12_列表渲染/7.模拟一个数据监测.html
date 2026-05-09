@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟一个数据监测</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name: '尚硅谷',
+            address: '北京'
+        }
+        const obs = new Observer(data)
+        const vm = {}
+        vm._data = data = obs
+        function Observer(obj) {
+            const keys = Object.keys(obj)
+            keys.forEach((k) => {
+                Object.defineProperty(this, k, {
+                    get() {
+                        return obj[k]
+                    },
+                    set(val) {
+                        console.log(`${k}被改了, 接着去解析模版, 生成虚拟DOM..`)
+                        obj[k] = val                  
+                    }
+                })
+            })
+        }
+    </script>
+</body>
+</html>

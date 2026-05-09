@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.set()的使用</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>学校信息</h1>
+        <h2>学校名称：{{ name }}</h2>
+        <h2>学校地址：{{ address }}</h2>
+        <h1>学生信息</h1>
+        <button @click="addSex">添加性别(默认男)</button>
+        <h2>姓名：{{ student.name }}</h2>
+        <h2>年龄：真实{{ student.age.rAge }}  虚假{{ student.age.sAge }}</h2>
+        <h2 v-if="student.sex">性别：{{ student.sex }}</h2>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷',
+            address: '北京',
+            student: {
+                name: '珊莎',
+                age: {
+                    rAge: 40,
+                    sAge: 18,
+                },
+                friends: [
+                    {name: '琼恩雪诺', age: 30},
+                    {name: '坦格利安', age: 25}
+                ]                
+            }
+        },
+        methods: {
+            addSex() {
+                // Vue.set(this.student, 'sex', '男')
+                vm.$set(this.student, 'sex', '男')
+            }
+        },
+    })
+</script>
+</html>

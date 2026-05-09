@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引出生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">欢迎来到沈阳</h2>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            opacity: 1
+        },
+        methods: {
+        },
+        mounted() {
+            setInterval(() => {  
+                this.opacity -= 0.01
+                if(this.opacity <= 0) this.opacity = 1
+            }, 16)
+        },
+    })
+
+    // 一种不被推荐的写法
+    // setInterval(() => {
+    //     vm.opacity -= 0.01
+    //     if(vm.opacity <= 0) vm.opacity = 1
+    // }, 16)
+</script>
+</html>

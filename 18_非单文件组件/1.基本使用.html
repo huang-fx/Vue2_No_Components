@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>基本使用</title>
+</head>
+<body>
+    <div id="root">
+        <hello></hello>
+        <hr>
+        <school></school>
+        <school></school>
+        <hr>
+        <student></student>        
+    </div>
+    <div id="root2">
+        <hr>
+        <hello></hello>
+    </div>
+</body>
+<script>
+    // 学校组件
+    const school = Vue.extend({
+        template: `
+            <div>
+                <h2>学校名称：{{ schoolName }}</h2>
+                <h2>学校地址：{{ address }}</h2>
+            </div>
+        `,
+        data() {
+            return {
+                schoolName: '尚硅谷',
+                address: '辽宁沈阳'
+            }
+        }
+    })
+
+    // 学生组件
+    const student = Vue.extend({
+        template: `
+            <div>
+                <h2>学生姓名：{{ studentName }}</h2>
+                <h2>学生年龄：{{ age }}</h2>
+            </div>
+        `,
+        data() {
+            return {
+                studentName: '小张',
+                age: 18
+            }
+        }
+    })
+
+    // 全局组件
+    const sayHello = Vue.extend({
+        template: `
+            <div>
+                <h2>你是{{name}}嘛</h2>
+            </div>
+        `,
+        data() {
+            return {
+                name: '汤姆'
+            }
+        }
+    })
+
+    // 注册全局组件
+    Vue.component('hello', sayHello)
+
+    new Vue({
+        el: '#root',
+        components: {
+            school,
+            student
+        }
+    })
+
+    new Vue({
+        el: '#root2'
+    })
+</script>
+</html>

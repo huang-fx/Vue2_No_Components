@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>el和data的两种写法</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <h2>Hello, {{ name }}</h2>
+    </div>
+</body>
+
+<script>
+    const v = new Vue({
+        // el: '.root',  // el的第一种写法
+        // data: {            // data的第一种写法
+        //     name: '尚硅谷'
+        // }
+        data() {    // data的第二种写法
+            return {
+                name: '尚硅谷请求'   
+            }
+        }
+    })
+    v.$mount('.root')     // el的第二种方法
+    console.log(v)    
+</script>
+</html>

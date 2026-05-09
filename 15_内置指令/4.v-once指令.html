@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>v-once指令</title>
+</head>
+<body>
+    <div id="root">
+        <h2 v-once>n的初始值为：{{ n }}</h2>
+        <h2>n的值为：{{ n }}</h2>
+        <button @click="n++">n值+1</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            n: 1
+        }
+    })
+</script>
+</html>

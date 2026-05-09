@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_深度监视</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2><br/><br/>
+        <button @click="changeWeather">切换天气</button><br/><br/>
+        <span>a的值是：{{ numbers.a }}</span><br/><br/>
+        <button  @click="numbers.a++">a的值加1</button><br/><br/>
+        <span>b的值是：{{ numbers.b }}</span><br/><br/>
+        <button  @click="numbers.b++">b的值加1</button>
+    </div>
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true,
+            numbers: {
+                a: 1,
+                b: 1
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽' 
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            isHot: {
+                immediate: true,
+                handler(newValue, oldValue) {
+                    console.log('isHot被监视了', newValue, oldValue)
+                }
+            },
+            // 只监视a的变化 而不需要监视b的变化
+            // 'numbers.a': {
+            //     handler() {
+            //         console.log('a被改变了')                    
+            //     }
+            // },
+            // 错误写法 这样做监视的是numbers中的a和b地址的变化 而a和b地址是不变的 值的变化在这种情况下是监视不到的
+            // numbers: {
+            //     handler() {
+            //         console.log('numbers改变了')                    
+            //     }                
+            // }
+            // 正确写法
+            numbers: {
+                // deep: true,
+                handler() {
+                    console.log('numbers改变了')                    
+                }                
+            }
+        }
+    })
+</script>
+</html>

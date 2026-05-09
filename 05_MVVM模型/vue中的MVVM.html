@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue中的MVVM</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <h2>Hello, {{ name }}</h2>
+        <h2>Hello, {{ address }}</h2>
+        <h2>Hello, {{ $options }}</h2>
+        <h2>Hello, {{ $emit }}</h2>
+        <h2>Hello, {{ _c }}</h2>
+    </div>
+</body>
+
+<script>
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '.root',  // el的第一种写法
+        data: {            // data的第一种写法
+            name: '尚硅谷',
+            address: '北京'
+        }
+    }) 
+    console.log(vm)     
+</script>
+</html>

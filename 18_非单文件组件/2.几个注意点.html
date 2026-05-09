@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>几个注意点</title>
+</head>
+<body>
+    <div id="root">
+        <school></school>
+        <school></school>
+        <school></school>
+        <school/>
+        <school/>
+        <school/>
+    </div>
+</body>
+<script>
+    const school = {
+        template: `
+            <div>
+                <h2>学校名称：{{ name }}</h2>
+                <h2>学校地址：{{ address }}</h2>
+            </div>
+        `, 
+        name: 'Atguigu',
+        data() {
+            return {
+                name: '尚硅谷',
+                address: '沈阳'
+            }
+        }
+    }
+
+    new Vue({
+        el: '#root',
+        components: {
+            school
+            // School: school,
+            // 'my-school': school
+        }
+    })
+</script>
+</html>

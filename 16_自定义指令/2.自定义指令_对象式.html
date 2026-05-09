@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>自定义指令-对象式</title>
+</head>
+<body>
+    <div id="root">
+        <h2>n的初始值为：<span v-text="n"></span></h2>
+        <h2>n的被放大10之后的值为：<span v-big-number="n"></span></h2>
+        <button @click="n++">n值+1</button>
+        <input type="text" v-fbind="n">
+    </div>
+    <hr/>
+    <div id="root2">
+        <input type="text" v-fbind="x">
+    </div>
+</body>
+<script>
+    // 全局自定义指令
+    Vue.directive('fbind', {
+        bind(element, binding) {
+            element.value = binding.value
+        },
+        inserted(element, binding) {
+            element.focus()
+        },
+        update(element, binding) {
+            element.value = binding.value
+        }
+    })
+
+    new Vue({
+        el: '#root',
+        data: {
+            n: 1
+        },
+        directives: {
+            'big-number'(element, binding) {
+                console.log('big')
+                element.innerText = binding.value * 10
+            }
+            // 局部自定义指令
+            // fbind: {
+            //     bind(element, binding) {
+            //         element.value = binding.value
+            //     },
+            //     inserted(element, binding) {
+            //         element.focus()
+            //     },
+            //     update(element, binding) {
+            //         element.value = binding.value
+            //     }
+            // }
+        }
+    })
+
+    new Vue({
+        el: '#root2',
+        data: {
+            x: 1
+        }
+    })
+</script>
+</html>

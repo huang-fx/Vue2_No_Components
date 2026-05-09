@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的基本使用</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎来到{{ name }}</h2>
+        <button v-on:click="showInfo">点我点我</button>
+        <button v-on:click="showInfo2($event, 666)">点就完了</button>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷'
+        },
+        methods: {
+            showInfo() {
+                alert('欢迎来到Vue')
+            },
+            showInfo2(event, number) {
+                console.log("你真", number)      
+                console.log(event)                          
+            }
+        }
+    })
+</script>
+</html>
